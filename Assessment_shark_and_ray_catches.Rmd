@@ -1,0 +1,124 @@
+---
+title: "**Assessment of the sharks and rays caught in Small-Scale Fisheries (SSF) in Mozambique**"
+author: "Naseeba"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk
+```
+
+```{r data, echo=FALSE, message = FALSE}
+
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(readr)
+Mozambique_Catch_Metadata_2018_2019_2020 <- read.csv("Mozambique_Catch_Metadata_2018_2019_2020.csv")
+view(Mozambique_Catch_Metadata_2018_2019_2020)
+```
+
+## INTRODUCTION
+
+
+![Importance of shark and ray species](images/sharks and rays pic.jpg)
+
+
+![Artisanal fisheries](images/IMG_20200205_132620.jpg)
+
+
+## STUDY AREA
+![Map of SSF landing site surveys for shark and ray species, in Mozambique](images/20210427_Study area.jpg)
+
+## DATA OVERVIEW
+
+The `Mozambique_Catch_Metadata_2018_2019_2020` dataset provides data collected at 11 landing sites, from five province in Mozambique to assess the shark and ray species caught in Small-Scale Fisheries (SSF), between November 2018 to March 2020. An important note is that all rays belong to the superorder *Batoidea*, which includes stingrays, electric rays, skates, guitarfish, and sawfish, but they are commonly known as "ray", so we will use this term to refer to all of them.
+
+
+
+```{r}
+summary(Mozambique_Catch_Metadata_2018_2019_2020)
+```
+
+## OBJECTIVES
+
+- Determine:
+1. Catch composition for elasmobranchs recorded in SSF
+2. Size composition of elasmobranchs recorded in SSF
+3. Threatened and/or protected species of elasmobranchs recorded in SSF
+4. Size frequency of elasmobranchs recorded in SSF
+5. Types of fishing gears recorded in SSF
+
+## RESULTS
+
+### 1. Catch composition for elasmobranchs recorded in SSF 
+
+```{r Mozambique_Catch_Metadata_2018_2019_2020}
+sum(Mozambique_Catch_Metadata_2018_2019_2020$which_species == "Shark")
+sum(Mozambique_Catch_Metadata_2018_2019_2020$which_species == "Ray")
+```
+There are **822 sharks** and **269 rays** recorded between 2018 and 2020. However, during the same period there were some situations which data collectors interviewed some fishermen but none elasmobranchs have been recorded among the catches. On the other hand, some days they went to the field but couldn't interviewed any fishermen.
+
+```{r}
+ggplot(Mozambique_Catch_Metadata_2018_2019_2020, aes(x = which_species, color = which_species))+
+  geom_bar()+
+  labs(
+    title = "Elasmobranchs recorded by in Small-Scale Fisheries",
+    x = "Which_Species",
+    caption= "Figure 1. Number of Elasmobranchs recorded in SSF, between 2018 and 2020, in Mozambique"
+  )
+```
+
+#### 1.1 Catch composition of elasmobranchs recorded in SSF
+
+
+```{r}
+ggplot(Mozambique_Catch_Metadata_2018_2019_2020, aes(x = province, fill = which_species))+
+       geom_bar(position = "dodge")
+```
+
+
+
+#### 1.2 Species of elasmobranchs recorded in SSF 
+
+What is the abundance of sharks and rays species?
+```{r}
+Mozambique_Catch_Metadata_2018_2019_2020%>% count(species_name)
+```
+
+ 
+What is the abundance of sharks and rays species, by province? 
+ 
+### 2. Size composition of elasmobranchs recorded in SSF 
+
+What is the size composition of shark and ray species, by province?
+
+What is the sex ration of shark and ray species, by province?
+
+### 3. Threatened and/or protected species of elasmobranchs recorded in SSF
+What is the number of shark and ray species with their respective IUCN categories, by province?
+
+Which kind of policies or species protected/management agreements (IOTC, CMS, CITES, etc.) do elasmobranchs caught in the SSF fall into?	
+
+### 4. Size frequency of elasmobranchs recorded in SSF
+What is the Size frequency, by month, by province for the commonly caught species of elasmobranchs? 
+
+### 5. Types of fishing gears recorded in SSF 
+What are the types of fishing gear, by province to caught elasmobranchs in SSF?
+
+What are the impacts of different gear types on commonly caught species, by province?
+
+-	Associate the types of gears with size, sex, province, abundance, diversity of species.
+
+What is the number of target and by-catch individuals, per species, and per province?
+
+-	Illustration of the number of fishermen that target or by-catch elasmobranchs, by province. 
+
+-	Illustration of types of gears associated with the number of fishermen that target or by-catch elasmobranchs, by province
+
+-	Illustration of the number of species caught by the fishermen who do target or by-catch elasmobranchs, by province
+
+
+  
